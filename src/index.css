@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Poppins", sans-serif;
+
+  --color-primary: #1A237E;
+  --color-accent: #F06292;
+  --color-lavender: #F3E5F5;
+  --color-cyan-soft: #E0F7FA;
+  --color-blush: #FCE4EC;
+
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-slate-900 antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+/* ─── HERO SECTION ─── */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  background: #EDE8F5;
+  min-height: 92vh;
+  /* Seamless with navbar (#EDE8F5 navbar bg already set via Tailwind) */
+}
+
+/* Giant ghost "Canxest" text — behind doctor */
+.hero-ghost-text {
+  position: absolute;
+  top: 82px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: clamp(80px, 16vw, 168px);
+  font-weight: 900;
+  font-family: "Poppins", sans-serif;
+  color: rgba(27, 31, 122, 0.22);
+  letter-spacing: -7px;
+  line-height: 1;
+  z-index: 5;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Doctor transparent PNG — centred, in front of text */
+.hero-doctor {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 88%;
+  max-height: 780px;
+  z-index: 15;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Top-right stats block */
+.hero-top-right {
+  position: absolute;
+  top: 88px;
+  right: 40px;
+  z-index: 20;
+}
+
+/* Bottom-right tagline block */
+.hero-bottom-right {
+  position: absolute;
+  bottom: 44px;
+  right: 40px;
+  z-index: 20;
+  max-width: 340px;
+  text-align: right;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 70vh;
+  }
+  .hero-ghost-text {
+    font-size: clamp(56px, 18vw, 96px);
+    letter-spacing: -3px;
+    top: 60px;
+  }
+  .hero-top-right {
+    top: auto;
+    bottom: 120px;
+    right: 16px;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .hero-bottom-right {
+    right: 16px;
+    left: 16px;
+    bottom: 20px;
+    max-width: 100%;
+    text-align: center;
+  }
+}
