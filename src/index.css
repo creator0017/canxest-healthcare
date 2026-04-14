@@ -30,83 +30,95 @@
   overflow: hidden;
   background: #EDE8F5;
   min-height: 92vh;
-  /* Seamless with navbar (#EDE8F5 navbar bg already set via Tailwind) */
 }
 
-/* Giant ghost "Canxest" text — behind doctor */
+/* Giant ghost text — two lines: Canxest + Healthcare */
 .hero-ghost-text {
   position: absolute;
-  top: 82px;
+  top: calc(72px + 3vh);
   left: 0;
   right: 0;
   text-align: center;
-  font-size: clamp(80px, 16vw, 168px);
+  font-size: clamp(50px, 9.9vw, 122px);
   font-weight: 900;
   font-family: "Poppins", sans-serif;
-  color: rgba(27, 31, 122, 0.22);
-  letter-spacing: -7px;
-  line-height: 1;
+  color: rgba(27, 31, 122, 0.20);
+  letter-spacing: -5px;
+  line-height: 0.92;
   z-index: 5;
   user-select: none;
   pointer-events: none;
-  white-space: nowrap;
 }
 
-/* Doctor transparent PNG — centred, in front of text */
-.hero-doctor {
+/* Wrapper — sits in front of ghost text, creates isolated stacking context
+   so mix-blend-mode only blends with the hero bg, NOT with ghost text */
+.hero-doctor-wrap {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  height: 88%;
-  max-height: 780px;
+  height: 76%;
+  max-height: 680px;
   z-index: 15;
-  object-fit: contain;
+  isolation: isolate;
   pointer-events: none;
 }
 
-/* Top-right stats block */
-.hero-top-right {
+/* Doctor image — blends white bg away against the lavender hero only */
+.hero-doctor {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top;
+  mix-blend-mode: multiply;
+  display: block;
+}
+
+/* Bottom-LEFT stats block (avatars + 500+) */
+.hero-bottom-left {
   position: absolute;
-  top: 88px;
-  right: 40px;
+  bottom: 44px;
+  left: 40px;
   z-index: 20;
 }
 
-/* Bottom-right tagline block */
+/* Bottom-RIGHT tagline block */
 .hero-bottom-right {
   position: absolute;
   bottom: 44px;
   right: 40px;
   z-index: 20;
-  max-width: 340px;
+  max-width: 300px;
   text-align: right;
 }
 
-/* Mobile adjustments */
+/* ─── MOBILE ─── */
 @media (max-width: 768px) {
   .hero-section {
-    min-height: 70vh;
+    min-height: 100svh;
   }
+
   .hero-ghost-text {
-    font-size: clamp(56px, 18vw, 96px);
-    letter-spacing: -3px;
-    top: 60px;
+    font-size: clamp(32px, 11.7vw, 57px);
+    letter-spacing: -2px;
+    top: 62px;
+    line-height: 0.95;
   }
-  .hero-top-right {
-    top: auto;
-    bottom: 120px;
-    right: 16px;
-    left: 16px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+
+  .hero-doctor-wrap {
+    height: 80%;
+    max-height: none;
   }
-  .hero-bottom-right {
-    right: 16px;
-    left: 16px;
+
+  /* Stats block — bottom-left, compact */
+  .hero-bottom-left {
     bottom: 20px;
-    max-width: 100%;
-    text-align: center;
+    left: 14px;
+    right: auto;
+  }
+
+  /* Hide right tagline on mobile — moved to a section below hero */
+  .hero-bottom-right {
+    display: none;
   }
 }

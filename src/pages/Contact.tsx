@@ -58,9 +58,9 @@ const Contact = () => {
   };
 
   return (
-    <div className="pt-20">
+    <div className="pt-16 md:pt-24">
       {/* Hero Section */}
-      <section className="py-20 bg-lavender">
+      <section className="py-10 md:py-20 bg-lavender">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -68,21 +68,21 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="bg-white text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4 uppercase tracking-wider inline-block">Get in Touch</span>
-            <h1 className="text-5xl font-bold text-primary mb-6">Contact Us</h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            <h1 className="text-2xl md:text-5xl font-bold text-primary mb-4 md:mb-6">Contact Us</h1>
+            <p className="text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
               Have questions or want to book an appointment? We're here to help you every step of the way.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-10 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
             {/* Contact Info */}
-            <div className="lg:col-span-1 space-y-8">
+            <div className="lg:col-span-1 space-y-6 md:space-y-8">
               <div>
-                <h2 className="text-3xl font-bold text-primary mb-8">Contact Details</h2>
+                <h2 className="text-xl md:text-3xl font-bold text-primary mb-5 md:mb-8">Contact Details</h2>
                 <div className="space-y-6">
                   <div className="flex gap-4">
                     <div className="w-12 h-12 bg-lavender rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -154,8 +154,8 @@ const Contact = () => {
 
             {/* Booking Form */}
             <div className="lg:col-span-2">
-              <div className="bg-slate-50 p-8 rounded-[3rem] border border-slate-100 shadow-sm">
-                <h2 className="text-3xl font-bold text-primary mb-8">Book an Appointment</h2>
+              <div className="bg-slate-50 p-5 md:p-8 rounded-2xl md:rounded-[3rem] border border-slate-100 shadow-sm">
+                <h2 className="text-xl md:text-3xl font-bold text-primary mb-5 md:mb-8">Book an Appointment</h2>
 
                 {status === "success" ? (
                   <div className="flex flex-col items-center justify-center text-center gap-4 py-16">
@@ -245,8 +245,8 @@ const Contact = () => {
           </div>
 
           {/* Map Section */}
-          <div className="mt-24">
-            <div className="w-full h-[425px] bg-slate-100 rounded-[3rem] overflow-hidden shadow-inner border border-slate-100">
+          <div className="mt-10 md:mt-24">
+            <div className="w-full h-[260px] md:h-[425px] bg-slate-100 rounded-2xl md:rounded-[3rem] overflow-hidden shadow-inner border border-slate-100">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3897.662862842426!2d76.6341233!3d12.3384211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afb433b9b3b3b3b%3A0x3afb433b9b3b3b3b!2sCanxest%20Healthcare%20Clinic!5e0!3m2!1sen!2sin!4v1712918400000!5m2!1sen!2sin"
                 width="100%"

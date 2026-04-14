@@ -73,9 +73,9 @@ const Doctors = () => {
   ];
 
   return (
-    <div className="pt-20 pb-20">
+    <div className="pt-16 md:pt-24 pb-10 md:pb-20">
       {/* Hero */}
-      <section className="py-20 bg-lavender">
+      <section className="py-10 md:py-20 bg-lavender">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -85,8 +85,8 @@ const Doctors = () => {
             <span className="bg-blush text-accent px-4 py-1.5 rounded-full text-sm font-bold mb-4 uppercase tracking-wider inline-block">
               Our Expert
             </span>
-            <h1 className="text-5xl font-bold text-primary mb-4">Meet Our Doctor</h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <h1 className="text-2xl md:text-5xl font-bold text-primary mb-3 md:mb-4">Meet Our Doctor</h1>
+            <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
               Highly qualified, experienced, and dedicated to providing the best surgical oncology care in Mysore.
             </p>
           </motion.div>
@@ -94,9 +94,9 @@ const Doctors = () => {
       </section>
 
       {/* Doctor Card */}
-      <section className="py-16 bg-white">
+      <section className="py-8 md:py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             {doctors.map((doctor, index) => (
               <motion.div
                 key={doctor.name}
@@ -123,8 +123,8 @@ const Doctors = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
 
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-slate-800 mb-1">{doctor.name}</h3>
+                <div className="p-5 md:p-8">
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-1">{doctor.name}</h3>
                   <p className="text-accent font-semibold mb-4">{doctor.specialty}</p>
 
                   <div className="space-y-3 mb-6">
@@ -199,11 +199,11 @@ const Doctors = () => {
       </section>
 
       {/* Consulting Hospitals — 20 hospitals */}
-      <section className="py-20 bg-primary">
+      <section className="py-10 md:py-20 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white mb-4">Consultant &amp; Visiting Consultant</h2>
-            <p className="text-blue-100 text-lg max-w-2xl mx-auto">
+          <div className="text-center mb-8 md:mb-14">
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4">Consultant &amp; Visiting Consultant</h2>
+            <p className="text-blue-100 text-sm md:text-lg max-w-2xl mx-auto">
               Dr. Nischal Raj L holds surgical privileges and serves as a visiting consultant at 20+ leading
               hospitals across Mysore, Mandya, and Bangalore.
             </p>
@@ -295,7 +295,7 @@ const Doctors = () => {
               </button>
 
               {/* Modal header image */}
-              <div className="h-72 lg:h-[420px] relative bg-lavender">
+              <div className="h-48 md:h-72 lg:h-[420px] relative bg-lavender">
                 <img
                   src={selectedDoctor.image}
                   alt={selectedDoctor.name}
@@ -313,7 +313,7 @@ const Doctors = () => {
                 </div>
               </div>
 
-              <div className="p-8 sm:p-12">
+              <div className="p-5 sm:p-8 md:p-12">
                 <div className="space-y-8">
                   {/* Bio */}
                   <div>

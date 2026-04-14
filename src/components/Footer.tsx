@@ -1,12 +1,12 @@
 const Footer = () => (
-  <footer className="bg-slate-900 text-white pt-24 pb-12 overflow-hidden relative">
+  <footer className="bg-slate-900 text-white pt-12 md:pt-24 pb-8 md:pb-12 overflow-hidden relative">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div className="grid lg:grid-cols-4 gap-12 mb-16">
+      <div className="grid lg:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-16">
         <div className="col-span-2">
           <img
               src="/canxest-logo.png"
               alt="Canxest Healthcare"
-              className="h-12 w-auto object-contain mb-6 brightness-0 invert"
+              className="h-[67px] w-auto object-contain mb-6"
             />
           <p className="text-slate-400 max-w-sm mb-8">
             Expert surgical oncology care by Dr. Nischal Raj L. Specialized in complex cancer surgeries and personalized treatment plans in Mysore.

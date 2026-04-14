@@ -23,13 +23,13 @@ const Navbar = ({ onBookClick }: NavbarProps) => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16 md:h-24">
           {/* Logo */}
           <Link to="/" className="flex items-center" onClick={closeMobile}>
             <img
               src="/canxest-logo.png"
               alt="Canxest Healthcare"
-              className="h-12 w-auto object-contain"
+              className="h-9 md:h-[67px] w-auto object-contain"
               onError={(e) => {
                 const img = e.target as HTMLImageElement;
                 img.style.display = 'none';

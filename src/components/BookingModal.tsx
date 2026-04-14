@@ -82,19 +82,19 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden pointer-events-auto relative"
+              className="bg-white w-full max-w-2xl rounded-2xl md:rounded-[2.5rem] shadow-2xl overflow-hidden pointer-events-auto relative max-h-[95vh] overflow-y-auto"
             >
               {/* Close Button */}
               <button
                 onClick={handleClose}
-                className="absolute top-6 right-6 p-2 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors z-10"
+                className="absolute top-4 right-4 p-2 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors z-10"
               >
                 <X className="w-5 h-5 text-slate-600" />
               </button>
 
               <div className="grid md:grid-cols-5 h-full">
-                {/* Left Sidebar */}
-                <div className="md:col-span-2 bg-primary p-8 text-white flex flex-col justify-between">
+                {/* Left Sidebar — hidden on mobile */}
+                <div className="hidden md:flex md:col-span-2 bg-primary p-8 text-white flex-col justify-between">
                   <div>
                     <h3 className="text-2xl font-bold mb-4">Book Your Visit</h3>
                     <p className="text-blue-100 text-sm leading-relaxed mb-8">
@@ -133,7 +133,17 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                 </div>
 
                 {/* Right Side - Form */}
-                <div className="md:col-span-3 p-8">
+                <div className="md:col-span-3 p-5 md:p-8">
+                  {/* Mobile-only top bar */}
+                  <div className="md:hidden bg-primary rounded-xl p-4 mb-5 text-white flex items-center justify-between">
+                    <div>
+                      <p className="font-bold text-sm">Book Your Visit</p>
+                      <p className="text-blue-200 text-xs">Confirmed within 2 hours</p>
+                    </div>
+                    <a href="tel:8105815577" className="bg-white/20 px-3 py-1.5 rounded-lg text-xs font-bold">
+                      Call Us
+                    </a>
+                  </div>
                   {status === "success" ? (
                     <div className="h-full flex flex-col items-center justify-center text-center gap-4 py-8">
                       <CheckCircle2 className="w-16 h-16 text-green-500" />

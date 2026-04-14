@@ -73,9 +73,9 @@ const Services = ({ onBookClick }: ServicesProps) => {
   ];
 
   return (
-    <div className="pt-20">
+    <div className="pt-16 md:pt-24">
       {/* Hero Section */}
-      <section className="py-20 bg-cyan-soft">
+      <section className="py-10 md:py-20 bg-cyan-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -83,8 +83,8 @@ const Services = ({ onBookClick }: ServicesProps) => {
             transition={{ duration: 0.6 }}
           >
             <span className="bg-white text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4 uppercase tracking-wider inline-block">Our Expertise</span>
-            <h1 className="text-5xl font-bold text-primary mb-6">Treatments & Services</h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            <h1 className="text-2xl md:text-5xl font-bold text-primary mb-4 md:mb-6">Treatments & Services</h1>
+            <p className="text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
               We provide a full spectrum of oncology services, from initial diagnosis to complex surgical interventions and post-operative care.
             </p>
           </motion.div>
@@ -92,18 +92,18 @@ const Services = ({ onBookClick }: ServicesProps) => {
       </section>
 
       {/* Specialized Procedures */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-12 md:py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
             {specializedProcedures.map((proc, idx) => (
-              <div key={idx} className="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all group">
-                <div className="h-64 overflow-hidden relative">
+              <div key={idx} className="bg-white rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all group">
+                <div className="h-44 md:h-64 overflow-hidden relative">
                   <img src={proc.image} alt={proc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
                 </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-primary mb-4">{proc.title}</h3>
-                  <p className="text-slate-600 leading-relaxed mb-6">{proc.desc}</p>
+                <div className="p-5 md:p-8">
+                  <h3 className="text-lg md:text-2xl font-bold text-primary mb-2 md:mb-4">{proc.title}</h3>
+                  <p className="text-slate-600 leading-relaxed mb-4 md:mb-6 text-sm md:text-base">{proc.desc}</p>
                   <button
                     onClick={() => setSelectedService(proc)}
                     className="text-accent font-bold flex items-center gap-2 group/btn"
@@ -134,16 +134,16 @@ const Services = ({ onBookClick }: ServicesProps) => {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="bg-white w-full max-w-2xl rounded-[3rem] overflow-hidden shadow-2xl relative z-10"
+              className="bg-white w-full max-w-2xl rounded-2xl md:rounded-[3rem] overflow-hidden shadow-2xl relative z-10 max-h-[90vh] overflow-y-auto"
             >
               <button
                 onClick={() => setSelectedService(null)}
-                className="absolute top-6 right-6 w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center transition-colors z-20"
+                className="absolute top-4 right-4 w-9 h-9 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center transition-colors z-20"
               >
-                <X className="w-6 h-6 text-slate-600" />
+                <X className="w-5 h-5 text-slate-600" />
               </button>
 
-              <div className="h-64 overflow-hidden">
+              <div className="h-44 md:h-64 overflow-hidden">
                 <img
                   src={selectedService.image}
                   alt={selectedService.title}
@@ -152,15 +152,15 @@ const Services = ({ onBookClick }: ServicesProps) => {
                 />
               </div>
 
-              <div className="p-10">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-lavender rounded-2xl flex items-center justify-center">
-                    <Info className="text-primary w-6 h-6" />
+              <div className="p-5 md:p-10">
+                <div className="flex items-center gap-3 mb-4 md:mb-6">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-lavender rounded-xl md:rounded-2xl flex items-center justify-center">
+                    <Info className="text-primary w-5 h-5 md:w-6 md:h-6" />
                   </div>
-                  <h2 className="text-3xl font-bold text-primary">{selectedService.title}</h2>
+                  <h2 className="text-xl md:text-3xl font-bold text-primary">{selectedService.title}</h2>
                 </div>
 
-                <p className="text-slate-600 text-lg leading-relaxed mb-8">
+                <p className="text-slate-600 text-sm md:text-lg leading-relaxed mb-6 md:mb-8">
                   {selectedService.fullDesc}
                 </p>
 
@@ -188,12 +188,12 @@ const Services = ({ onBookClick }: ServicesProps) => {
       </AnimatePresence>
 
       {/* Hospital Tie-ups */}
-      <section className="py-24 bg-white">
+      <section className="py-12 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-primary rounded-[3rem] p-12 lg:p-20 text-white relative overflow-hidden">
+          <div className="bg-primary rounded-2xl md:rounded-[3rem] p-5 md:p-12 lg:p-20 text-white relative overflow-hidden">
             <div className="relative z-10">
-              <h2 className="text-4xl font-bold mb-6">Hospital Attachments & Tie-ups</h2>
-              <p className="text-blue-100 text-lg mb-12 leading-relaxed max-w-3xl">
+              <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-6">Hospital Attachments & Tie-ups</h2>
+              <p className="text-blue-100 text-sm md:text-lg mb-6 md:mb-12 leading-relaxed max-w-3xl">
                 Dr. Nischal Raj L has surgical privileges and is a visiting consultant at 20+ leading hospitals across Mysore, Mandya, and Bangalore, ensuring seamless inpatient care and advanced surgical facilities.
               </p>
 
