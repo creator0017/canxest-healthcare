@@ -161,24 +161,58 @@ const Home = ({ onBookClick }: HomeProps) => {
       {/* ─── DOCTOR SNIPPET ─── */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="bg-blush text-accent px-4 py-1.5 rounded-full text-sm font-bold mb-4 uppercase tracking-wider inline-block">
-              Meet Our Specialist
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
-              Expert Oncology Care by Dr. Nischal Raj L
-            </h2>
-            <p className="text-base md:text-lg text-slate-600 mb-8 leading-relaxed">
-              Dr. Nischal Raj L is a highly experienced surgical oncologist with over 18 years of expertise.
-              Having managed more than 10,000 cancer patients and performed over 5,000 complex cancer surgeries,
-              he is dedicated to providing the highest quality care.
-            </p>
-            <Link
-              to="/doctors"
-              className="text-accent font-bold text-lg flex items-center justify-center gap-2 hover:gap-3 transition-all"
-            >
-              View Full Profile <ChevronRight className="w-5 h-5" />
-            </Link>
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            {/* Doctor Image */}
+            <div className="flex justify-center">
+              <div className="relative w-64 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-lavender">
+                <img
+                  src="/doctor-desk.jpg"
+                  alt="Dr. Nischal Raj L"
+                  className="w-full h-full object-cover object-top"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary/80 to-transparent p-4">
+                  <p className="text-white font-bold text-sm">Dr. Nischal Raj L</p>
+                  <p className="text-blue-200 text-xs">MCh Surgical Oncology</p>
+                </div>
+              </div>
+            </div>
+            {/* Text */}
+            <div>
+              <span className="bg-blush text-accent px-4 py-1.5 rounded-full text-sm font-bold mb-4 uppercase tracking-wider inline-block">
+                Meet Our Specialist
+              </span>
+              <h2 className="text-2xl md:text-4xl font-bold text-primary mb-4">
+                Expert Oncology Care by Dr. Nischal Raj L
+              </h2>
+              <p className="text-base text-slate-600 mb-6 leading-relaxed">
+                Dr. Nischal Raj L is a highly experienced surgical oncologist with over 18 years of expertise.
+                Having managed more than 10,000 cancer patients and performed over 5,000 complex cancer surgeries,
+                he is dedicated to providing the highest quality care.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                <a
+                  href="tel:8105815577"
+                  className="flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-primary/90 transition-all"
+                >
+                  📞 Call Now
+                </a>
+                <a
+                  href="https://wa.me/918105815577?text=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment%20with%20Dr.%20Nischal%20Raj%20L"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-[#25D366]/90 transition-all"
+                >
+                  💬 WhatsApp
+                </a>
+              </div>
+              <Link
+                to="/doctors"
+                className="text-accent font-bold flex items-center gap-2 hover:gap-3 transition-all"
+              >
+                View Full Profile <ChevronRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -240,7 +274,7 @@ const Home = ({ onBookClick }: HomeProps) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center items-center">
             <div>
               <p className="text-primary text-sm font-bold uppercase mb-1">Our Location</p>
-              <p className="font-medium text-slate-700 text-sm md:text-base">17/2C, KRS Main Road, Gokulam 1st Stage, Mysore</p>
+              <p className="font-medium text-slate-700 text-sm md:text-base">17/2C, KRS Main Road, Next to CEG Hospital, Gokulam 1st Stage, VV Mohalla, Mysore 570002</p>
             </div>
             <div>
               <p className="text-primary text-sm font-bold uppercase mb-1">Call Us</p>

@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Send, Phone, MessageCircle, Calendar, Clock, CheckCircle2, Loader2 } from "lucide-react";
+import { X, Phone, MessageCircle, Calendar, Clock, Loader2 } from "lucide-react";
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -14,50 +14,56 @@ interface FormData {
   service: string;
 }
 
-type Status = "idle" | "loading" | "success" | "error";
-
 const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
-  const [form, setForm] = useState<FormData>({ name: "", phone: "", date: "", service: "Oncology Consultation" });
-  const [status, setStatus] = useState<Status>("idle");
-  const [message, setMessage] = useState("");
+  const [form, setForm] = useState<FormData>({
+    name: "",
+    phone: "",
+    date: "",
+    service: "Oncology Consultation",
+  });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.phone || !form.date) {
-      setStatus("error");
-      setMessage("Please fill in all required fields.");
-      return;
-    }
+    if (!form.name || !form.phone || !form.date) return;
 
-    setStatus("loading");
-    try {
-      const res = await fetch("/api/appointments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setStatus("success");
-        setMessage(data.message);
-        setForm({ name: "", phone: "", date: "", service: "Oncology Consultation" });
-      } else {
-        setStatus("error");
-        setMessage(data.error || "Something went wrong. Please try again.");
-      }
-    } catch {
-      setStatus("error");
-      setMessage("Unable to connect to the server. Please call us directly.");
-    }
+    setLoading(true);
+
+    // Build Google Calendar URL with appointment details
+    // Date format required: YYYYMMDD for all-day, or YYYYMMDDTHHmmSS for timed
+    const d = form.date.replace(/-/g, ""); // e.g. 20260415
+    const startTime = `${d}T100000`;       // 10:00 AM
+    const endTime   = `${d}T110000`;       // 11:00 AM
+
+    const title   = encodeURIComponent(`Appointment: ${form.name} — ${form.service}`);
+    const details = encodeURIComponent(
+      `Patient Name: ${form.name}\nPhone: ${form.phone}\nService: ${form.service}\n\nBooked via Canxest Healthcare website.`
+    );
+    const guest   = encodeURIComponent("canxesthealthcareclinic@gmail.com");
+
+    const calUrl =
+      `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+      `&text=${title}` +
+      `&details=${details}` +
+      `&dates=${startTime}/${endTime}` +
+      `&add=${guest}`;
+
+    window.open(calUrl, "_blank", "noopener,noreferrer");
+
+    setTimeout(() => {
+      setLoading(false);
+      setForm({ name: "", phone: "", date: "", service: "Oncology Consultation" });
+      onClose();
+    }, 800);
   };
 
   const handleClose = () => {
-    setStatus("idle");
-    setMessage("");
+    setForm({ name: "", phone: "", date: "", service: "Oncology Consultation" });
+    setLoading(false);
     onClose();
   };
 
@@ -93,12 +99,12 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
               </button>
 
               <div className="grid md:grid-cols-5 h-full">
-                {/* Left Sidebar — hidden on mobile */}
+                {/* Left Sidebar */}
                 <div className="hidden md:flex md:col-span-2 bg-primary p-8 text-white flex-col justify-between">
                   <div>
                     <h3 className="text-2xl font-bold mb-4">Book Your Visit</h3>
                     <p className="text-blue-100 text-sm leading-relaxed mb-8">
-                      Schedule a consultation with our oncology specialists. We'll confirm your slot within 2 hours.
+                      Fill the form and your appointment will be added to our calendar. We'll confirm within 2 hours.
                     </p>
 
                     <div className="space-y-6">
@@ -108,7 +114,7 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                         </div>
                         <div>
                           <p className="text-[10px] uppercase font-bold text-blue-300">Call Us</p>
-                          <p className="text-sm font-semibold">8105815577</p>
+                          <p className="text-sm font-semibold">+91 81058 15577</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
@@ -117,7 +123,7 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                         </div>
                         <div>
                           <p className="text-[10px] uppercase font-bold text-blue-300">WhatsApp</p>
-                          <p className="text-sm font-semibold">8105815577</p>
+                          <p className="text-sm font-semibold">+91 81058 15577</p>
                         </div>
                       </div>
                     </div>
@@ -127,14 +133,14 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                     <div className="flex items-center gap-2 text-xs font-bold text-blue-200 uppercase tracking-widest mb-2">
                       <Clock className="w-3 h-3" /> Timings
                     </div>
-                    <p className="text-sm">Mon - Sat: 10 AM - 1:30 PM</p>
-                    <p className="text-sm">5 PM - 6:30 PM</p>
+                    <p className="text-sm">Mon – Sat: 10 AM – 1:30 PM</p>
+                    <p className="text-sm">5 PM – 6:30 PM</p>
                   </div>
                 </div>
 
-                {/* Right Side - Form */}
+                {/* Right Side — Form */}
                 <div className="md:col-span-3 p-5 md:p-8">
-                  {/* Mobile-only top bar */}
+                  {/* Mobile top bar */}
                   <div className="md:hidden bg-primary rounded-xl p-4 mb-5 text-white flex items-center justify-between">
                     <div>
                       <p className="font-bold text-sm">Book Your Visit</p>
@@ -144,92 +150,75 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                       Call Us
                     </a>
                   </div>
-                  {status === "success" ? (
-                    <div className="h-full flex flex-col items-center justify-center text-center gap-4 py-8">
-                      <CheckCircle2 className="w-16 h-16 text-green-500" />
-                      <h4 className="text-2xl font-bold text-primary">Appointment Requested!</h4>
-                      <p className="text-slate-600">{message}</p>
-                      <button
-                        onClick={handleClose}
-                        className="mt-4 bg-accent text-white px-8 py-3 rounded-full font-bold hover:bg-accent/90 transition-all"
-                      >
-                        Done
-                      </button>
+
+                  <form className="space-y-4" onSubmit={handleSubmit}>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Full Name *</label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={form.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm"
+                        placeholder="Enter your name"
+                      />
                     </div>
-                  ) : (
-                    <form className="space-y-4" onSubmit={handleSubmit}>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Full Name *</label>
-                        <input
-                          type="text"
-                          name="name"
-                          value={form.name}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm"
-                          placeholder="Enter your name"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Phone Number *</label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={form.phone}
-                          onChange={handleChange}
-                          required
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm"
-                          placeholder="+91 00000 00000"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Preferred Date *</label>
-                        <input
-                          type="date"
-                          name="date"
-                          value={form.date}
-                          onChange={handleChange}
-                          required
-                          min={new Date().toISOString().split("T")[0]}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm bg-white"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Service</label>
-                        <select
-                          name="service"
-                          value={form.service}
-                          onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm bg-white"
-                        >
-                          <option>Oncology Consultation</option>
-                          <option>Surgical Procedure</option>
-                          <option>Lab Test at Home</option>
-                          <option>Medical Certificate</option>
-                        </select>
-                      </div>
-
-                      {status === "error" && (
-                        <p className="text-red-500 text-xs font-medium">{message}</p>
-                      )}
-
-                      <button
-                        type="submit"
-                        disabled={status === "loading"}
-                        className="w-full bg-accent text-white py-4 rounded-2xl font-bold text-sm hover:bg-accent/90 transition-all shadow-lg shadow-accent/20 flex items-center justify-center gap-2 mt-4 disabled:opacity-60 disabled:cursor-not-allowed"
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Phone Number *</label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={form.phone}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm"
+                        placeholder="+91 00000 00000"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Preferred Date *</label>
+                      <input
+                        type="date"
+                        name="date"
+                        value={form.date}
+                        onChange={handleChange}
+                        required
+                        min={new Date().toISOString().split("T")[0]}
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm bg-white"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Service</label>
+                      <select
+                        name="service"
+                        value={form.service}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/10 outline-none transition-all text-sm bg-white"
                       >
-                        {status === "loading" ? (
-                          <><Loader2 className="w-4 h-4 animate-spin" /> Booking...</>
-                        ) : (
-                          <><Calendar className="w-4 h-4" /> Confirm Appointment</>
-                        )}
-                      </button>
+                        <option>Oncology Consultation</option>
+                        <option>Surgical Procedure</option>
+                        <option>Lab Test at Home</option>
+                        <option>Medical Certificate</option>
+                      </select>
+                    </div>
 
-                      <p className="text-[10px] text-center text-slate-400 mt-4">
-                        By clicking confirm, you agree to our privacy policy and terms of service.
-                      </p>
-                    </form>
-                  )}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full bg-accent text-white py-4 rounded-2xl font-bold text-sm hover:bg-accent/90 transition-all shadow-lg shadow-accent/20 flex items-center justify-center gap-2 mt-4 disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {loading ? (
+                        <><Loader2 className="w-4 h-4 animate-spin" /> Opening Calendar...</>
+                      ) : (
+                        <><Calendar className="w-4 h-4" /> Confirm Appointment</>
+                      )}
+                    </button>
+
+                    <p className="text-[10px] text-center text-slate-400 mt-2">
+                      This will open Google Calendar to confirm your appointment with the clinic.
+                    </p>
+                  </form>
                 </div>
               </div>
             </motion.div>

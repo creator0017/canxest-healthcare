@@ -8,9 +8,10 @@ const Footer = () => (
               alt="Canxest Healthcare"
               className="h-[67px] w-auto object-contain mb-6"
             />
-          <p className="text-slate-400 max-w-sm mb-8">
-            Expert surgical oncology care by Dr. Nischal Raj L. Specialized in complex cancer surgeries and personalized treatment plans in Mysore.
+          <p className="text-slate-400 max-w-sm mb-1">
+            Expert surgical oncology care by Dr. Nischal Raj L. — 18+ years, 5,000+ surgeries, Mysore.
           </p>
+          <p className="text-accent text-sm italic font-medium mb-8">"Choose Well, Be Well"</p>
         </div>
         
         <div>

@@ -16,28 +16,21 @@ interface Doctor {
   awards?: string[];
 }
 
-/* 20 hospitals with location context */
 const consultingHospitals = [
   { name: "Manipal Hospital", city: "Mysore" },
-  { name: "Brindavan Hospital", city: "Mysore" },
   { name: "Nirmala Hospital", city: "Mysore" },
+  { name: "Brindavan Hospital", city: "Mysore" },
   { name: "Clearmedi Radiant Hospital", city: "Mysore" },
   { name: "Apollo Hospital", city: "Mysore" },
-  { name: "Bharath Hospital", city: "Mysore" },
   { name: "CEG Hospital", city: "Mysore" },
-  { name: "New Priyadarshini Hospital", city: "Mysore" },
-  { name: "Sigma Hospital", city: "Mysore" },
   { name: "Suyog Hospital", city: "Mysore" },
-  { name: "Avant BKG", city: "Mysore" },
-  { name: "Ramakrishna Hospital", city: "Mysore" },
-  { name: "Madeshwara Hospital", city: "Mysore" },
-  { name: "Supriya Hospital", city: "Mysore" },
-  { name: "NJ Hospital", city: "Mysore" },
+  { name: "SIGMA Hospital", city: "Mysore" },
+  { name: "BKG Hospital", city: "Mysore" },
+  { name: "Priyadarshini Hospital", city: "Mysore" },
   { name: "Spandana Hospital", city: "Mandya" },
-  { name: "Archana Hospital", city: "Mandya" },
-  { name: "Pragathi Hospital", city: "Mandya" },
-  { name: "Trustwell Hospital", city: "Bangalore" },
   { name: "HCG Hospital", city: "Bangalore" },
+  { name: "Trustwell Hospital", city: "Bangalore" },
+  { name: "LEO Hospital", city: "Kalpetta" },
 ];
 
 const Doctors = () => {

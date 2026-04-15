@@ -248,7 +248,7 @@ const Contact = () => {
           <div className="mt-10 md:mt-24">
             <div className="w-full h-[260px] md:h-[425px] bg-slate-100 rounded-2xl md:rounded-[3rem] overflow-hidden shadow-inner border border-slate-100">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3897.662862842426!2d76.6341233!3d12.3384211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3afb433b9b3b3b3b%3A0x3afb433b9b3b3b3b!2sCanxest%20Healthcare%20Clinic!5e0!3m2!1sen!2sin!4v1712918400000!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3897.4!2d76.6225!3d12.3392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baf70380a67b779%3A0xc40b9a5ec0296fcd!2sCanxest%20Healthcare!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -260,7 +260,7 @@ const Contact = () => {
             </div>
             <div className="mt-6 text-center">
               <a
-                href="https://share.google/O1z8NkywN0lSbR8m2"
+                href="https://maps.app.goo.gl/4QGiTbkRWF4VkMtF7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-primary font-bold hover:text-accent transition-colors"
