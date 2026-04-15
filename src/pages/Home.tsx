@@ -105,55 +105,34 @@ const Home = ({ onBookClick }: HomeProps) => {
         </div>
       </section>
 
-      {/* ─── USP COMPARISON ─── */}
+      {/* ─── WHY CANXEST ─── */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 md:mb-16">
             <h2 className="text-2xl md:text-4xl font-bold text-primary mb-4">
-              You've waited in clinic queues. Now, let healthcare come to you.
+              Why Canxest Healthcare
             </h2>
+            <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
+              What makes Canxest Healthcare different?
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center relative">
-            <div className="bg-white p-6 md:p-8 rounded-3xl shadow-xl">
-              <h3 className="text-lg md:text-xl font-bold text-slate-800 mb-4">Traditional Clinics</h3>
-              <ul className="space-y-3 text-slate-600">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-red-400 rounded-full flex-shrink-0" />
-                  Traffic &amp; long waits
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-red-400 rounded-full flex-shrink-0" />
-                  Delayed reports
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-red-400 rounded-full flex-shrink-0" />
-                  Multiple clinic visits
-                </li>
-              </ul>
-            </div>
-
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 hidden md:flex w-12 h-12 bg-primary text-white items-center justify-center rounded-full font-bold shadow-lg text-sm">
-              vs
-            </div>
-
-            <div className="bg-white p-6 md:p-8 rounded-3xl shadow-xl border-2 border-accent">
-              <h3 className="text-lg md:text-xl font-bold text-primary mb-4">Canxest Healthcare</h3>
-              <ul className="space-y-3 text-slate-600">
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
-                  Free home sample collection
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
-                  Reports in 24 hrs
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0" />
-                  Doctor-reviewed digital certificates
-                </li>
-              </ul>
-            </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+            {[
+              { title: 'Comprehensive Personalized Cancer Care', desc: 'Every treatment plan is tailored to the individual patient — no one-size-fits-all approach.' },
+              { title: 'Multiple Hospital Options', desc: 'Surgical privileges at 20+ leading hospitals across Mysore, Mandya, and Bangalore.' },
+              { title: 'Affordable Treatment', desc: 'Accessible, high-quality cancer care that caters to patients from all walks of life.' },
+              { title: 'Advanced Surgical Techniques', desc: 'Laparoscopic, robotic, and oncoplastic methods for precision and faster recovery.' },
+              { title: 'Multidisciplinary Approach', desc: 'Surgical, medical, radiation oncology, and support teams working together for the best outcomes.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-white p-6 md:p-8 rounded-3xl shadow-xl flex gap-4 items-start">
+                <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="text-base md:text-lg font-bold text-primary mb-1">{item.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -163,7 +142,15 @@ const Home = ({ onBookClick }: HomeProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             {/* Doctor Image */}
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-4">
+              <div className="text-center md:hidden">
+                <span className="bg-blush text-accent px-4 py-1.5 rounded-full text-sm font-bold mb-3 uppercase tracking-wider inline-block">
+                  Meet Our Specialist
+                </span>
+                <h2 className="text-2xl font-bold text-primary">
+                  Expert Oncology Care by Dr. Nischal Raj L
+                </h2>
+              </div>
               <div className="relative w-64 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-lavender">
                 <img
                   src="/doctor-desk.jpg"
@@ -179,10 +166,10 @@ const Home = ({ onBookClick }: HomeProps) => {
             </div>
             {/* Text */}
             <div>
-              <span className="bg-blush text-accent px-4 py-1.5 rounded-full text-sm font-bold mb-4 uppercase tracking-wider inline-block">
+              <span className="bg-blush text-accent px-4 py-1.5 rounded-full text-sm font-bold mb-4 uppercase tracking-wider hidden md:inline-block">
                 Meet Our Specialist
               </span>
-              <h2 className="text-2xl md:text-4xl font-bold text-primary mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-primary mb-4 hidden md:block">
                 Expert Oncology Care by Dr. Nischal Raj L
               </h2>
               <p className="text-base text-slate-600 mb-6 leading-relaxed">

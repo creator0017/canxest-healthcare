@@ -91,6 +91,59 @@ const Services = ({ onBookClick }: ServicesProps) => {
         </div>
       </section>
 
+      {/* ─── SERVICES / TREATMENTS OFFERED ─── */}
+      <section className="py-12 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 md:mb-14">
+            <h2 className="text-2xl md:text-4xl font-bold text-primary mb-3">Services / Treatments Offered</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+            {/* Core Oncology Services */}
+            <div className="bg-lavender rounded-3xl p-6 md:p-10">
+              <h3 className="text-lg md:text-2xl font-bold text-primary mb-5">Core Oncology Services</h3>
+              <ul className="space-y-3">
+                {[
+                  'Comprehensive cancer opinion',
+                  'Surgical oncology',
+                  'Medical oncology',
+                  'Immunotherapy',
+                  'Radiation oncology',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-slate-700 text-sm md:text-base">
+                    <span className="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Specialized Procedures */}
+            <div className="bg-blush rounded-3xl p-6 md:p-10">
+              <h3 className="text-lg md:text-2xl font-bold text-primary mb-5">Specialized Procedures</h3>
+              <ul className="space-y-3">
+                {[
+                  'Breast cancer and reconstructive surgery',
+                  'Thyroid surgery',
+                  'Gynaecological cancer surgeries',
+                  'Oral cancer surgery',
+                  'GI and pancreatic / liver cancer procedures',
+                  'Kidney, bladder and prostate cancer surgeries',
+                  'Soft tissue and bone cancer surgeries',
+                  'Lung and thoracic cancer surgeries',
+                  'Laparoscopic and robotic surgeries',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-slate-700 text-sm md:text-base">
+                    <span className="w-2 h-2 bg-primary rounded-full flex-shrink-0 mt-2" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Specialized Procedures */}
       <section className="py-12 md:py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
