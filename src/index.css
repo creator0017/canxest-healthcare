@@ -96,25 +96,46 @@
 @media (max-width: 768px) {
   .hero-section {
     min-height: 100svh;
+    display: flex;
+    flex-direction: column;
   }
 
   .hero-ghost-text {
-    font-size: clamp(32px, 11.7vw, 57px);
+    font-size: clamp(38px, 13vw, 60px);
     letter-spacing: -2px;
-    top: 62px;
-    line-height: 0.95;
+    top: 58px;
+    line-height: 0.92;
   }
 
+  /* Doctor fills from bottom up — taller so no empty gap */
   .hero-doctor-wrap {
-    height: 80%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    /* stretch from just below the ghost text all the way to bottom */
+    height: calc(100% - 140px);
     max-height: none;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .hero-doctor {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: bottom center;
   }
 
   /* Stats block — bottom-left, compact */
   .hero-bottom-left {
-    bottom: 20px;
+    bottom: 16px;
     left: 14px;
     right: auto;
+    z-index: 25;
   }
 
   /* Hide right tagline on mobile — moved to a section below hero */
