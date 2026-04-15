@@ -8,10 +8,10 @@ interface NavbarProps {
 }
 
 const navLinks = [
+  { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
   { to: "/doctors", label: "Our Doctor" },
-  { to: "/stories", label: "Patient Stories" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -47,6 +47,7 @@ const Navbar = ({ onBookClick }: NavbarProps) => {
               <NavLink
                 key={to}
                 to={to}
+                end={to === "/"}
                 className={({ isActive }) =>
                   isActive ? "text-accent" : "hover:text-accent transition-colors"
                 }
@@ -92,6 +93,7 @@ const Navbar = ({ onBookClick }: NavbarProps) => {
                 <NavLink
                   key={to}
                   to={to}
+                  end={to === "/"}
                   onClick={closeMobile}
                   className={({ isActive }) =>
                     `block px-4 py-3 rounded-xl font-medium transition-colors ${

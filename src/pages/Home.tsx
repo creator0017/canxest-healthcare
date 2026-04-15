@@ -1,6 +1,104 @@
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { CheckCircle2, ChevronRight, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+
+const reviews = [
+  {
+    text: "Dr. Nischal Raj L and the team at Canxest Healthcare provided exceptional care during my treatment. The personalized attention and clear communication made a difficult journey much easier.",
+    name: "Anitha R.",
+    tag: "Breast Cancer Survivor",
+  },
+  {
+    text: "I was worried about my surgery, but the expertise shown here was remarkable. The recovery was swift, and the post-operative support was outstanding.",
+    name: "Karthik S.",
+    tag: "Thyroid Surgery Patient",
+  },
+  {
+    text: "The best place for cancer consultation in Mysore. They don't just treat the disease; they care for the person. Highly recommended.",
+    name: "Priya M.",
+    tag: "Oncology Consultation",
+  },
+  {
+    text: "The diagnostic coordination was seamless. I got my reports fast, and the treatment plan was explained in detail. Truly professional.",
+    name: "Rajesh V.",
+    tag: "GI Oncology Patient",
+  },
+];
+
+const TestimonialsSection = () => {
+  const [current, setCurrent] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startTimer = () => {
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % reviews.length);
+    }, 3500);
+  };
+
+  useEffect(() => {
+    startTimer();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
+
+  const goTo = (idx: number) => {
+    setCurrent(idx);
+    if (timerRef.current) clearInterval(timerRef.current);
+    startTimer();
+  };
+
+  return (
+    <section className="py-16 md:py-24 bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-6 md:mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-2">Testimonials</h2>
+          <p className="text-slate-500 font-medium">Trusted by 10,000+ families in Mysore.</p>
+          <p className="text-accent font-bold mt-1">4.9/5 on Google</p>
+        </div>
+
+        <div className="max-w-3xl mx-auto">
+          <div className="relative min-h-[220px] md:min-h-[200px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current}
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -40 }}
+                transition={{ duration: 0.4 }}
+                className="bg-white p-8 md:p-12 rounded-[2rem] shadow-xl border border-slate-100 relative"
+              >
+                <Quote className="w-10 h-10 text-accent/20 absolute top-6 left-6" />
+                <div className="relative z-10 text-center">
+                  <p className="text-base md:text-xl text-slate-700 font-medium leading-relaxed mb-6 italic">
+                    "{reviews[current].text}"
+                  </p>
+                  <div className="flex flex-col items-center">
+                    <div className="w-12 h-1 bg-accent rounded-full mb-3" />
+                    <span className="font-bold text-primary text-base md:text-lg">{reviews[current].name}</span>
+                    <span className="text-accent font-semibold text-sm mt-0.5">{reviews[current].tag}</span>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex justify-center gap-2 mt-6">
+            {reviews.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  i === current ? "bg-accent w-6" : "bg-slate-300"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 interface HomeProps {
   onBookClick: () => void;
@@ -221,39 +319,7 @@ const Home = ({ onBookClick }: HomeProps) => {
       </section>
 
       {/* ─── TESTIMONIALS ─── */}
-      <section className="py-16 md:py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Testimonials</h2>
-            <p className="text-slate-600 max-w-xl mx-auto font-medium">What our Patients say about us</p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="bg-white p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-xl relative border border-slate-100"
-            >
-              <Quote className="w-10 h-10 md:w-12 md:h-12 text-accent/20 absolute top-8 left-8 md:top-10 md:left-10" />
-              <div className="relative z-10 text-center">
-                <p className="text-lg md:text-2xl text-slate-700 font-medium leading-relaxed mb-8 italic">
-                  "The medical care provided by Dr. Nischal is excellent. I genuinely value his approaches
-                  and therapy. A generous and compassionate person."
-                </p>
-                <div className="flex flex-col items-center">
-                  <div className="w-16 h-1 bg-accent rounded-full mb-4" />
-                  <span className="font-bold text-primary text-lg md:text-xl">Patient Review</span>
-                  <span className="text-accent font-bold uppercase text-sm mt-1 tracking-wider">
-                    Verified Google Review
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection />
 
       {/* ─── QUICK CONTACT BAR ─── */}
       <section className="py-10 md:py-12 border-t border-slate-100">

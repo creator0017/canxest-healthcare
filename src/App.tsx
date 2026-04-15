@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { User, Share2, X, Instagram, Youtube } from "lucide-react";
+import { User, Share2, X, Instagram, Youtube, Phone } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Doctors from "./pages/Doctors";
-import PatientStories from "./pages/PatientStories";
 import Contact from "./pages/Contact";
 import BookingModal from "./components/BookingModal";
 
@@ -60,32 +59,55 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services onBookClick={openBooking} />} />
             <Route path="/doctors" element={<Doctors />} />
-            <Route path="/stories" element={<PatientStories />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
         <Footer />
 
-        {/* Floating Book Now Button — bottom RIGHT */}
-        <motion.button
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={openBooking}
-          className="fixed bottom-8 right-8 z-50 bg-accent text-white p-4 rounded-full shadow-2xl shadow-accent/40 flex items-center justify-center group overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-white/20 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full" />
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], opacity: [1, 0.5, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 bg-accent rounded-full -z-10"
-          />
-          <User className="w-6 h-6 relative z-10" />
-          <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-500 whitespace-nowrap font-bold relative z-10">
-            Book Now
-          </span>
-        </motion.button>
+        {/* Floating buttons — bottom RIGHT (call above, book below) */}
+        <div className="fixed bottom-8 right-8 z-50 flex flex-col items-center gap-3">
+          {/* Call button */}
+          <motion.a
+            href="tel:8105815577"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="bg-green-500 text-white p-4 rounded-full shadow-2xl shadow-green-500/40 flex items-center justify-center group overflow-hidden relative"
+          >
+            <div className="absolute inset-0 bg-white/20 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full" />
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 bg-green-500 rounded-full -z-10"
+            />
+            <Phone className="w-6 h-6 relative z-10" />
+            <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-500 whitespace-nowrap font-bold relative z-10">
+              Call Now
+            </span>
+          </motion.a>
+
+          {/* Book Appointment button */}
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={openBooking}
+            className="bg-accent text-white p-4 rounded-full shadow-2xl shadow-accent/40 flex items-center justify-center group overflow-hidden relative"
+          >
+            <div className="absolute inset-0 bg-white/20 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full" />
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 bg-accent rounded-full -z-10"
+            />
+            <User className="w-6 h-6 relative z-10" />
+            <span className="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-500 whitespace-nowrap font-bold relative z-10">
+              Book Now
+            </span>
+          </motion.button>
+        </div>
 
         {/* Social Speed Dial — bottom LEFT */}
         <div className="fixed bottom-8 left-8 z-50 flex flex-col items-center gap-3">
