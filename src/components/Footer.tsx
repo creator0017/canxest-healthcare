@@ -9,7 +9,7 @@ const Footer = () => (
               className="h-[67px] w-auto object-contain mb-6"
             />
           <p className="text-slate-400 max-w-sm mb-1">
-            Expert surgical oncology care by Dr. Nischal Raj L. — 18+ years, 5,000+ surgeries, Mysore.
+            Expert surgical oncology care by Dr. Nischal Raj L 18+ years, 5,000+ surgeries, Mysore.
           </p>
           <p className="text-accent text-sm italic font-medium mb-8">"Choose Well, Be Well"</p>
         </div>
@@ -17,20 +17,20 @@ const Footer = () => (
         <div>
           <h4 className="font-bold text-lg mb-6">Services</h4>
           <ul className="space-y-4 text-slate-400">
-            <li><a href="#" className="hover:text-white transition-colors">Labs</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Pharmacy</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Consultations</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Certificates</a></li>
+            <li><a href="#" className="hover:text-white transition-colors">Oncology</a></li>
+            <li><a href="#" className="hover:text-white transition-colors">Chemotherapy</a></li>
+            <li><a href="#" className="hover:text-white transition-colors">Immunotherapy</a></li>
+            <li><a href="#" className="hover:text-white transition-colors"></a></li>
           </ul>
         </div>
         
         <div>
-          <h4 className="font-bold text-lg mb-6">Legal</h4>
+          <h4 className="font-bold text-lg mb-6"></h4>
           <ul className="space-y-4 text-slate-400">
-            <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Refund Policy</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Join as Doctor</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Health Camps</a></li>
+            <li><a href="#" className="hover:text-white transition-colors"></a></li>
+            <li><a href="#" className="hover:text-white transition-colors"></a></li>
+            <li><a href="#" className="hover:text-white transition-colors"></a></li>
+            <li><a href="#" className="hover:text-white transition-colors"></a></li>
           </ul>
         </div>
       </div>

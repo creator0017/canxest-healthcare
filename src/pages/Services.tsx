@@ -85,7 +85,7 @@ const Services = ({ onBookClick }: ServicesProps) => {
             <span className="bg-white text-primary px-4 py-1.5 rounded-full text-sm font-bold mb-4 uppercase tracking-wider inline-block">Our Expertise</span>
             <h1 className="text-2xl md:text-5xl font-bold text-primary mb-4 md:mb-6">Treatments & Services</h1>
             <p className="text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              We provide a full spectrum of oncology services, from initial diagnosis to complex surgical interventions and post-operative care.
+              Expert in medical oncology and surgical oncology We provide patient centric and comprehensive care
             </p>
           </motion.div>
         </div>
@@ -245,9 +245,9 @@ const Services = ({ onBookClick }: ServicesProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-primary rounded-2xl md:rounded-[3rem] p-5 md:p-12 lg:p-20 text-white relative overflow-hidden">
             <div className="relative z-10">
-              <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-6">Hospital Attachments & Tie-ups</h2>
+              <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-6"> Tie-ups Hospital  </h2>
               <p className="text-blue-100 text-sm md:text-lg mb-6 md:mb-12 leading-relaxed max-w-3xl">
-                Dr. Nischal Raj L has surgical privileges and is a visiting consultant at 20+ leading hospitals across Mysore, Mandya, and Bangalore, ensuring seamless inpatient care and advanced surgical facilities.
+                 20+ leading hospitals across Mysore, Mandya, and Bangalore, ensuring seamless inpatient care and advanced surgical facilities.
               </p>
 
               {[

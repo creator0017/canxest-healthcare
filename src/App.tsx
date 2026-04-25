@@ -1,6 +1,14 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 import { User, Share2, X, Instagram, Youtube, Phone } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -51,6 +59,7 @@ export default function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-white flex flex-col">
         <Navbar onBookClick={openBooking} />
         <main className="flex-grow">
@@ -109,68 +118,7 @@ export default function App() {
           </motion.button>
         </div>
 
-        {/* Social Speed Dial — bottom LEFT */}
-        <div className="fixed bottom-8 left-8 z-50 flex flex-col items-center gap-3">
-          {/* Social icons — animate up when open */}
-          <AnimatePresence>
-            {socialOpen && socialLinks.map((link, i) => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                title={link.label}
-                initial={{ opacity: 0, y: 16, scale: 0.6 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 16, scale: 0.6 }}
-                transition={{ delay: i * 0.07, type: "spring", stiffness: 320, damping: 22 }}
-                style={{ background: link.bg, boxShadow: `0 6px 20px ${link.shadow}` }}
-                className="w-12 h-12 rounded-full flex items-center justify-center"
-              >
-                {link.icon}
-              </motion.a>
-            ))}
-          </AnimatePresence>
-
-          {/* Toggle button — Share2 when closed, X when open */}
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
-            onClick={() => setSocialOpen((p) => !p)}
-            className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/40 relative overflow-hidden"
-          >
-            <motion.div
-              animate={{ scale: [1, 1.18, 1], opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 bg-primary rounded-full -z-10"
-            />
-            <AnimatePresence mode="wait">
-              {socialOpen ? (
-                <motion.div
-                  key="x"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.18 }}
-                >
-                  <X className="w-6 h-6 relative z-10" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="share"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.18 }}
-                >
-                  <Share2 className="w-6 h-6 relative z-10" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
-        </div>
+        {/* Social Speed Dial Removed */}
 
         <BookingModal isOpen={isBookingOpen} onClose={closeBooking} />
       </div>

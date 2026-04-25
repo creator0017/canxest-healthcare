@@ -12,17 +12,24 @@ const affiliatedHospitals = [
   { name: "Manipal Hospital", city: "Mysore" },
   { name: "Nirmala Hospital", city: "Mysore" },
   { name: "Brindavan Hospital", city: "Mysore" },
-  { name: "Clearmedi Radiant Hospital", city: "Mysore" },
+  { name: "Clear medi Radiant Hospital", city: "Mysore" },
   { name: "Apollo Hospital", city: "Mysore" },
+  { name: "Bharath hospital", city: "Mysore" },
   { name: "CEG Hospital", city: "Mysore" },
+  { name: "New Priyadarshini Hospital", city: "Mysore" },
   { name: "Suyog Hospital", city: "Mysore" },
   { name: "SIGMA Hospital", city: "Mysore" },
-  { name: "BKG Hospital", city: "Mysore" },
-  { name: "Priyadarshini Hospital", city: "Mysore" },
+  { name: "Avant BKG", city: "Mysore" },
+  { name: "Ramakrishna Hospital", city: "Mysore" },
+  { name: "Madeshwara Hospital", city: "Mysore" },
+  { name: "Supriya Hospital", city: "Mysore" },
+  { name: "NJ Hospital", city: "Mysore" },
+  { name: "Archana Hospital", city: "Mandya" },
+  { name: "Pragathi Hospital", city: "Mandya" },
   { name: "Spandana Hospital", city: "Mandya" },
-  { name: "HCG Hospital", city: "Bangalore" },
-  { name: "Trustwell Hospital", city: "Bangalore" },
-  { name: "LEO Hospital", city: "Kalpetta" },
+  { name: "Trustwel Hospital", city: "Bangalore" },
+  { name: "HCG Hospital", city: "Banglore" },
+  
 ];
 
 const awards = [
@@ -65,8 +72,7 @@ const About = () => {
             </h1>
             <p className="text-base md:text-xl text-accent font-bold italic mb-4">"Choose Well, Be Well"</p>
             <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
-              Established in March 2026, Canxest Healthcare is a specialized surgical oncology consultation clinic
-              in Mysore, dedicated to providing expert cancer opinions and personalised treatment roadmaps.
+               Canxest Healthcare is a specialized surgical oncology consultation clinic in Mysore, dedicated to providing expert cancer opinions and personalised treatment roadmaps.
             </p>
           </motion.div>
         </div>
@@ -199,7 +205,7 @@ const About = () => {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { icon: <Stethoscope className="w-7 h-7 text-accent" />, label: "Clinic Type", value: "Consultation Clinic" },
-              { icon: <Building2 className="w-7 h-7 text-accent" />, label: "Established", value: "March 2026" },
+              { icon: <Building2 className="w-7 h-7 text-accent" />, label: "Specialities medical", value: "radiation,surgical" },
               { icon: <Heart className="w-7 h-7 text-accent" />, label: "Speciality", value: "Surgical Oncology" },
             ].map((item, i) => (
               <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex gap-4 items-start">
@@ -278,7 +284,6 @@ const About = () => {
                     "CEG Hospital, Mysore",
                     "Brindavan Hospital, Mysore",
                     "Nirmala Hospital, Mysore",
-                    "Narayana Hospital, Mysore",
                   ].map((h, i) => (
                     <li key={i} className="flex gap-2 items-center">
                       <span className="w-1.5 h-1.5 bg-primary/40 rounded-full flex-shrink-0" />

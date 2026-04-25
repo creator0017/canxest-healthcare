@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Phone, MessageCircle, Calendar, Clock, Loader2 } from "lucide-react";
+import { X, Phone, MessageCircle, Clock, Loader2 } from "lucide-react";
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -33,26 +33,20 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
 
     setLoading(true);
 
-    // Build Google Calendar URL with appointment details
-    // Date format required: YYYYMMDD for all-day, or YYYYMMDDTHHmmSS for timed
-    const d = form.date.replace(/-/g, ""); // e.g. 20260415
-    const startTime = `${d}T100000`;       // 10:00 AM
-    const endTime   = `${d}T110000`;       // 11:00 AM
+    const formattedDate = new Date(form.date).toLocaleDateString("en-IN", {
+      weekday: "long", year: "numeric", month: "long", day: "numeric",
+    });
 
-    const title   = encodeURIComponent(`Appointment: ${form.name} — ${form.service}`);
-    const details = encodeURIComponent(
-      `Patient Name: ${form.name}\nPhone: ${form.phone}\nService: ${form.service}\n\nBooked via Canxest Healthcare website.`
-    );
-    const guest   = encodeURIComponent("canxesthealthcareclinic@gmail.com");
+    const message =
+      `🏥 *New Appointment Request — Canxest Healthcare*\n\n` +
+      `👤 *Name:* ${form.name}\n` +
+      `📞 *Patient Phone:* ${form.phone}\n` +
+      `📅 *Preferred Date:* ${formattedDate}\n` +
+      `🩺 *Service:* ${form.service}\n\n` +
+      `_Booked via Canxest Healthcare website._`;
 
-    const calUrl =
-      `https://calendar.google.com/calendar/render?action=TEMPLATE` +
-      `&text=${title}` +
-      `&details=${details}` +
-      `&dates=${startTime}/${endTime}` +
-      `&add=${guest}`;
-
-    window.open(calUrl, "_blank", "noopener,noreferrer");
+    const waUrl = `https://wa.me/918105815577?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
 
     setTimeout(() => {
       setLoading(false);
@@ -209,14 +203,14 @@ const BookingModal = ({ isOpen, onClose }: BookingModalProps) => {
                       className="w-full bg-accent text-white py-4 rounded-2xl font-bold text-sm hover:bg-accent/90 transition-all shadow-lg shadow-accent/20 flex items-center justify-center gap-2 mt-4 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {loading ? (
-                        <><Loader2 className="w-4 h-4 animate-spin" /> Opening Calendar...</>
+                        <><Loader2 className="w-4 h-4 animate-spin" /> Opening WhatsApp...</>
                       ) : (
-                        <><Calendar className="w-4 h-4" /> Confirm Appointment</>
+                        <><MessageCircle className="w-4 h-4" /> Confirm Appointment</>
                       )}
                     </button>
 
                     <p className="text-[10px] text-center text-slate-400 mt-2">
-                      This will open Google Calendar to confirm your appointment with the clinic.
+                      Your details will be sent to us via WhatsApp for confirmation.
                     </p>
                   </form>
                 </div>

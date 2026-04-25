@@ -1,7 +1,41 @@
 import { motion, AnimatePresence } from "motion/react";
-import { CheckCircle2, ChevronRight, Quote } from "lucide-react";
+import { CheckCircle2, ChevronRight, Quote, BookOpen, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+
+const publications = [
+  {
+    title: "Minimally Invasive Esophagectomy In Semi-Prone Position (Pawar Technique)",
+    journal: "Journal of Clinical Otorhinolaryngology, Head, and Neck Surgery",
+    details: "Vol. 27, Issue 2, 2023 | ISSN: 1001-1781",
+    authors: "Dr. Nischal Raj L, Dr. Adnan Saeed, Dr. Arpitha M R, Dr. Sumalatha A",
+  },
+  {
+    title: "Pelvic And Para-Aortic Lymph Node Positivity Rate In Ca Ovary In Post-Neoadjuvant Chemotherapy Cases",
+    journal: "JCHR — Journal of Clinical & Health Research",
+    details: "2023, 13(4), 74–80 | ISSN: 2251-6727 | www.jchr.org",
+    authors: "Dr. Nischal Raj L, Dr. Adnan Saeed, Dr. Avinash T R, Dr. Sumalatha A",
+  },
+  {
+    title: "A Study On Local Injection Of Methylprednisolone Acetate To Prevent Seroma Formation After Mastectomy In 210 Cases",
+    journal: "Journal of Population Therapeutics and Clinical Pharmacology",
+    details: "31(2), 2528–2535 | DOI: 10.53555/Jptcp.V3112.4655 | ISSN: 1710-6222",
+    authors: "Dr. Nischal Raj L, Dr. Adnan Saeed, Dr. Arpitha M R, Dr. Sumalatha A, Dr. Avinash T R",
+  },
+  {
+    title: "Sensitivity of Core Needle Biopsy in Soft Tissue and Bone Tumors at Clear Mediradiant Hospital, Mysore",
+    journal: "International Neurourology Journal (INJ)",
+    details: "",
+    authors: "Dr. Nischal Raj L, Dr. Adnan Saeed, Dr. Avinash T R",
+  },
+  {
+    title: "2 more publications on the way",
+    journal: "",
+    details: "",
+    authors: "",
+    upcoming: true,
+  },
+];
 
 const reviews = [
   {
@@ -105,100 +139,73 @@ interface HomeProps {
 }
 
 const Home = ({ onBookClick }: HomeProps) => {
+  const [showPublications, setShowPublications] = useState(false);
+
   return (
     <div>
       {/* ─── HERO SECTION ─── */}
-      <section className="hero-section">
-
-        {/* Giant ghost text — "Canxest" + "Healthcare" stacked */}
-        <div className="hero-ghost-text" aria-hidden="true">
-          Canxest<br />Healthcare
+      <section className="relative pt-16 md:pt-24 min-h-[500px] md:min-h-[650px] overflow-hidden" style={{ background: 'linear-gradient(135deg, #eef4fa 0%, #f5f0eb 100%)' }}>
+        
+        {/* Background image — right half, starts right below navbar */}
+        <div 
+          className="absolute top-16 md:top-24 right-0 w-full lg:w-[60%] bottom-0 z-0 bg-cover bg-[center_top] bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/hero-doctor-patient.png), url(/hope-patient.png)',
+          }}
+        >
+          {/* Fade-out gradient on left edge so text blends nicely */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#eef4fa] via-[#eef4fa]/60 to-transparent lg:w-[40%]" />
         </div>
 
-        {/* Doctor image — wrapper isolates blend mode so ghost text stays BEHIND */}
-        <div className="hero-doctor-wrap">
-          <img
-            src="/doctor-cutout.png"
-            alt="Dr. Nischal Raj L"
-            className="hero-doctor"
-            onError={(e) => {
-              const img = e.target as HTMLImageElement;
-              if (!img.dataset.fallback) {
-                img.dataset.fallback = "1";
-                img.src = "/doctor-scrubs.jpg";
-              } else {
-                img.style.display = 'none';
-              }
-            }}
-          />
-        </div>
+        {/* Text content — left side, on top of gradient */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center min-h-[450px] md:min-h-[550px]">
+          <div className="max-w-xl py-10 md:py-16">
+            <h1 className="text-5xl md:text-[4.5rem] font-serif font-bold leading-[1.08] text-[#0A5B68] mb-5 tracking-tight" style={{ fontStyle: 'italic' }}>
+              BELIEVE{' '}
+              THERE IS{' '}
+              <br className="hidden md:block" />
+              <span className="text-[#E79538]">HOPE </span>
+              FOR
+              <br />
+              A <span className="text-[#E79538]">CURE.</span>
+            </h1>
 
-        {/* BOTTOM-LEFT — Avatar stack + 500+ stat */}
-        <div className="hero-bottom-left">
-          <div style={{ display: 'flex', marginBottom: 8 }}>
-            {[
-              { letter: 'P', bg: '#c0392b' },
-              { letter: 'R', bg: '#27ae60' },
-              { letter: 'S', bg: '#e67e22' },
-            ].map((av, i) => (
-              <div
-                key={i}
-                style={{
-                  width: 36, height: 36, borderRadius: '50%',
-                  background: av.bg, color: 'white',
-                  fontWeight: 700, fontSize: 13,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginLeft: i > 0 ? -9 : 0,
-                  border: '2.5px solid #EDE8F5',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                }}
+            <div className="w-10 h-1 bg-[#E79538] mb-7"></div>
+
+            <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-9 max-w-md">
+              You can monitor and manage your health with the platform we provide. Our care, your comfort, better tomorrow.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={onBookClick}
+                className="px-7 py-3.5 bg-[#0A5B68] text-white rounded-lg font-semibold hover:bg-[#084954] transition-all shadow-lg shadow-[#0A5B68]/20 text-sm"
               >
-                {av.letter}
-              </div>
-            ))}
-          </div>
-          <div style={{ fontSize: 44, fontWeight: 900, color: '#1B1F7A', lineHeight: 1 }}>500+</div>
-          <div style={{ fontSize: 12, color: '#5a5a8a', marginTop: 3, maxWidth: 160, lineHeight: 1.4 }}>
-            Successfully treated happy patients across Mysore
-          </div>
-        </div>
-
-        {/* BOTTOM-RIGHT — Tagline (desktop only) */}
-        <div className="hero-bottom-right">
-          <p style={{ fontSize: 16, fontWeight: 800, color: '#1B1F7A', lineHeight: 1.3, margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '0.3px' }}>
-            Expert Surgical Oncology Care — Wherever You Are
-          </p>
-          <p style={{ fontSize: 13, color: '#5a5a8a', fontWeight: 500, lineHeight: 1.5, margin: '0 0 8px 0' }}>
-            Compassionate, precise, and personalized cancer treatment from a trusted specialist.
-          </p>
-          <p style={{ fontSize: 13, color: '#3a3a6a', fontWeight: 600, lineHeight: 1.5, margin: '0 0 10px 0' }}>
-            Dr. Nischal Raj L. delivers advanced surgical oncology care you can rely on — anytime, anywhere.
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-            {[
-              '✔ 18+ Years Experience',
-              '✔ 5,000+ Successful Surgeries',
-              '✔ Online & In-Person Available',
-            ].map((item) => (
-              <span key={item} style={{ fontSize: 13, color: '#1B1F7A', fontWeight: 700 }}>{item}</span>
-            ))}
+                Book Appointment
+              </button>
+              <Link
+                to="/services"
+                className="px-7 py-3.5 bg-transparent text-[#0A5B68] border-2 border-[#0A5B68] rounded-lg font-semibold hover:bg-[#0A5B68] hover:text-white transition-all text-center text-sm"
+              >
+                View Our Services
+              </Link>
+            </div>
           </div>
         </div>
 
-      </section>
-
-      {/* Mobile-only tagline — visible below hero on small screens */}
-      <section className="md:hidden bg-[#EDE8F5] px-5 py-5 border-t border-primary/10">
-        <p className="text-sm font-bold text-primary uppercase tracking-wide mb-3">
-          Expert Surgical Oncology Care — Wherever You Are
-        </p>
-        <div className="flex flex-col gap-1.5">
-          {[
-            '✔ 18+ Years Experience',
-            '✔ 5,000+ Successful Surgeries',
-            '✔ Online & In-Person Available',
-          ].map((item) => (
-            <span key={item} className="text-sm text-primary font-semibold">{item}</span>
+        {/* Social Icons — right edge */}
+        <div className="hidden lg:flex flex-col items-center gap-4 absolute right-6 top-1/2 -translate-y-1/2 z-20">
+          {['instagram', 'whatsapp'].map((social) => (
+            <a
+              key={social}
+              href={social === 'instagram' ? 'https://www.instagram.com/canxesthealthcare?igsh=Znh4eHg2a3hnbTQ5' : 'https://wa.me/918105815577'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-11 h-11 rounded-full bg-[#0A5B68] text-white flex items-center justify-center hover:bg-[#E79538] transition-colors shadow-lg"
+            >
+              {social === 'instagram' && <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>}
+              {social === 'whatsapp' && <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>}
+            </a>
           ))}
         </div>
       </section>
@@ -218,10 +225,12 @@ const Home = ({ onBookClick }: HomeProps) => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
             {[
               { title: 'Comprehensive Personalized Cancer Care', desc: 'Every treatment plan is tailored to the individual patient — no one-size-fits-all approach.' },
-              { title: 'Multiple Hospital Options', desc: 'Surgical privileges at 20+ leading hospitals across Mysore, Mandya, and Bangalore.' },
-              { title: 'Affordable Treatment', desc: 'Accessible, high-quality cancer care that caters to patients from all walks of life.' },
               { title: 'Advanced Surgical Techniques', desc: 'Laparoscopic, robotic, and oncoplastic methods for precision and faster recovery.' },
               { title: 'Multidisciplinary Approach', desc: 'Surgical, medical, radiation oncology, and support teams working together for the best outcomes.' },
+              { title: 'Affordable Treatment', desc: 'Accessible, high-quality cancer care that caters to patients from all walks of life.' },
+              { title: 'Multiple Hospital Options', desc: 'Surgical privileges at 20+ leading hospitals across Mysore, Mandya, and Bangalore.' },
+              { title: 'Chemotherapy ', desc: 'Personalized chemotherapy plans using the latest protocols to effectively target and control cancer while minimizing side effects.'},
+              { title: 'immuntherapy', desc: 'Harnessing the body’s immune system to fight cancer with cutting-edge immunotherapy treatments for improved outcomes.'},
             ].map((item, i) => (
               <div key={i} className="bg-white p-6 md:p-8 rounded-3xl shadow-xl flex gap-4 items-start">
                 <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
@@ -290,6 +299,12 @@ const Home = ({ onBookClick }: HomeProps) => {
                 >
                   💬 WhatsApp
                 </a>
+                <button
+                  onClick={() => setShowPublications(true)}
+                  className="flex items-center justify-center gap-2 bg-accent text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-accent/90 transition-all"
+                >
+                  <BookOpen className="w-4 h-4" /> Publications
+                </button>
               </div>
               <Link
                 to="/doctors"
@@ -307,7 +322,7 @@ const Home = ({ onBookClick }: HomeProps) => {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Ready to consult Dr. Nischal Raj L?</h2>
           <p className="text-blue-100 mb-8 text-base md:text-lg">
-            Book your appointment today. We confirm your slot within 2 hours.
+        
           </p>
           <button
             onClick={onBookClick}
@@ -342,6 +357,90 @@ const Home = ({ onBookClick }: HomeProps) => {
           </div>
         </div>
       </section>
+
+      {/* ─── PUBLICATIONS POPUP ─── */}
+      <AnimatePresence>
+        {showPublications && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6"
+          >
+            <div
+              onClick={() => setShowPublications(false)}
+              className="absolute inset-0 bg-primary/40 backdrop-blur-sm cursor-pointer"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 24 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 24 }}
+              className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-7 py-5 border-b border-slate-100 bg-primary">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-white">Publications</h2>
+                    <p className="text-xs text-blue-200">Dr. Nischal Raj L</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowPublications(false)}
+                  className="p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Body */}
+              <div className="overflow-y-auto px-7 py-6 space-y-5">
+                {publications.map((pub, i) => (
+                  <div
+                    key={i}
+                    className={`flex gap-4 p-5 rounded-2xl border ${
+                      pub.upcoming
+                        ? "border-dashed border-accent/40 bg-accent/5"
+                        : "border-slate-100 bg-slate-50"
+                    }`}
+                  >
+                    <div className={`mt-1 w-3 h-3 rounded-full flex-shrink-0 ${pub.upcoming ? "bg-accent/50" : "bg-primary"}`} />
+                    <div>
+                      <p className={`font-bold leading-snug mb-1 ${pub.upcoming ? "text-accent italic" : "text-slate-800"}`}>
+                        {pub.title}
+                      </p>
+                      {pub.journal && (
+                        <p className="text-xs font-semibold text-primary mb-0.5">{pub.journal}</p>
+                      )}
+                      {pub.details && (
+                        <p className="text-xs text-slate-500 mb-1">{pub.details}</p>
+                      )}
+                      {pub.authors && (
+                        <p className="text-xs text-slate-600">
+                          <span className="font-semibold">Authors:</span> {pub.authors}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer */}
+              <div className="px-7 py-4 border-t border-slate-100 bg-slate-50 flex justify-end">
+                <button
+                  onClick={() => setShowPublications(false)}
+                  className="px-6 py-2.5 bg-primary text-white rounded-full font-bold text-sm hover:bg-primary/90 transition-all"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
