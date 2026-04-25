@@ -36,25 +36,23 @@ const Contact = () => {
     }
 
     setStatus("loading");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setStatus("success");
-        setResponseMsg(data.message);
-        setForm({ name: "", phone: "", service: "Oncology Consultation", message: "" });
-      } else {
-        setStatus("error");
-        setResponseMsg(data.error || "Something went wrong. Please try again.");
-      }
-    } catch {
-      setStatus("error");
-      setResponseMsg("Unable to connect to the server. Please call us directly.");
-    }
+
+    const message =
+      `✉️ *New Contact Form Message — Canxest Healthcare*\n\n` +
+      `👤 *Name:* ${form.name}\n` +
+      `📞 *Phone:* ${form.phone}\n` +
+      `🩺 *Service:* ${form.service}\n\n` +
+      `📝 *Message:* ${form.message || "No message"}\n\n` +
+      `_Sent via Canxest Healthcare website._`;
+
+    const waUrl = `https://wa.me/918105815577?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+
+    setTimeout(() => {
+      setStatus("success");
+      setResponseMsg("Opening WhatsApp...");
+      setForm({ name: "", phone: "", service: "Oncology Consultation", message: "" });
+    }, 800);
   };
 
   return (

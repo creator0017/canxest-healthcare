@@ -274,24 +274,6 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                <h3 className="font-bold text-primary text-lg mb-4">Previous Hospitals</h3>
-                <ul className="space-y-1.5 text-slate-600 text-sm">
-                  {[
-                    "Clearmedi Radiant Hospital, Mysuru",
-                    "Kidwai Memorial Institute of Oncology, Bangalore",
-                    "Suyog Hospital, Mysore",
-                    "CEG Hospital, Mysore",
-                    "Brindavan Hospital, Mysore",
-                    "Nirmala Hospital, Mysore",
-                  ].map((h, i) => (
-                    <li key={i} className="flex gap-2 items-center">
-                      <span className="w-1.5 h-1.5 bg-primary/40 rounded-full flex-shrink-0" />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
 
             {/* Right — Awards + Photo */}
@@ -345,12 +327,11 @@ const About = () => {
         </div>
       </section>
 
-      {/* ─── HOSPITAL AFFILIATIONS ─── */}
+      {/* ─── HOSPITAL AFFILIATIONS & TIE-UPS ─── */}
       <section className="py-10 md:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">Hospital Affiliations</h2>
-            <p className="text-slate-600">Visiting consultant &amp; surgical privileges at leading hospitals</p>
+            <h2 className="text-2xl md:text-4xl font-bold text-primary mb-2">Tie-ups Hospital</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {affiliatedHospitals.map((h, i) => (

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Award, BookOpen, X, Calendar, Phone, Mail, ShieldCheck, MapPin } from "lucide-react";
+import { Award, BookOpen, X, Calendar, Phone, Mail, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Publication {
   title: string;
@@ -25,25 +25,17 @@ interface Doctor {
   publications?: Publication[];
 }
 
-const consultingHospitals = [
-  { name: "Manipal Hospital", city: "Mysore" },
-  { name: "Nirmala Hospital", city: "Mysore" },
-  { name: "Brindavan Hospital", city: "Mysore" },
-  { name: "Clearmedi Radiant Hospital", city: "Mysore" },
-  { name: "Apollo Hospital", city: "Mysore" },
-  { name: "CEG Hospital", city: "Mysore" },
-  { name: "Suyog Hospital", city: "Mysore" },
-  { name: "SIGMA Hospital", city: "Mysore" },
-  { name: "BKG Hospital", city: "Mysore" },
-  { name: "Priyadarshini Hospital", city: "Mysore" },
-  { name: "Spandana Hospital", city: "Mandya" },
-  { name: "HCG Hospital", city: "Bangalore" },
-  { name: "Trustwell Hospital", city: "Bangalore" },
-  { name: "LEO Hospital", city: "Kalpetta" },
-];
-
 const Doctors = () => {
   const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      const scrollAmount = direction === 'left' ? -350 : 350;
+      current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   const doctors: Doctor[] = [
     {
@@ -255,8 +247,22 @@ const Doctors = () => {
 
       {/* Doctor Cards */}
       <section className="py-8 md:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex lg:grid lg:grid-cols-4 gap-6 xl:gap-8 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          
+          {/* Mobile Navigation Arrows */}
+          <div className="flex justify-end gap-3 mb-6 lg:hidden">
+            <button onClick={() => scroll('left')} className="p-2.5 rounded-full bg-slate-50 hover:bg-primary hover:text-white transition-colors text-primary border border-slate-200">
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button onClick={() => scroll('right')} className="p-2.5 rounded-full bg-slate-50 hover:bg-primary hover:text-white transition-colors text-primary border border-slate-200">
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div 
+            ref={scrollRef}
+            className="flex lg:grid lg:grid-cols-4 gap-6 xl:gap-8 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar"
+          >
             {doctors.map((doctor, index) => (
               <motion.div
                 key={doctor.name}
@@ -311,76 +317,6 @@ const Doctors = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Consulting Hospitals — 20 hospitals */}
-      <section className="py-10 md:py-20 bg-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-14">
-            <h2 className="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4">Consultant &amp; Visiting Consultant</h2>
-            <p className="text-blue-100 text-sm md:text-lg max-w-2xl mx-auto">
-              Dr. Nischal Raj L holds surgical privileges and serves as a visiting consultant at 20+ leading
-              hospitals across Mysore, Mandya, and Bangalore.
-            </p>
-          </div>
-
-          {/* Mysore */}
-          <div className="mb-10">
-            <div className="flex items-center gap-2 mb-5">
-              <MapPin className="text-accent w-5 h-5" />
-              <h3 className="text-white font-bold text-lg uppercase tracking-wider">Mysore</h3>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-              {consultingHospitals.filter(h => h.city === "Mysore").map((hospital, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white/10 backdrop-blur border border-white/20 p-4 rounded-2xl flex items-center gap-2"
-                >
-                  <ShieldCheck className="text-accent w-4 h-4 flex-shrink-0" />
-                  <span className="font-medium text-sm text-white">{hospital.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mandya */}
-          <div className="mb-10">
-            <div className="flex items-center gap-2 mb-5">
-              <MapPin className="text-accent w-5 h-5" />
-              <h3 className="text-white font-bold text-lg uppercase tracking-wider">Mandya</h3>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {consultingHospitals.filter(h => h.city === "Mandya").map((hospital, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white/10 backdrop-blur border border-white/20 p-4 rounded-2xl flex items-center gap-2"
-                >
-                  <ShieldCheck className="text-accent w-4 h-4 flex-shrink-0" />
-                  <span className="font-medium text-sm text-white">{hospital.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Bangalore */}
-          <div>
-            <div className="flex items-center gap-2 mb-5">
-              <MapPin className="text-accent w-5 h-5" />
-              <h3 className="text-white font-bold text-lg uppercase tracking-wider">Bangalore</h3>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {consultingHospitals.filter(h => h.city === "Bangalore").map((hospital, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white/10 backdrop-blur border border-white/20 p-4 rounded-2xl flex items-center gap-2"
-                >
-                  <ShieldCheck className="text-accent w-4 h-4 flex-shrink-0" />
-                  <span className="font-medium text-sm text-white">{hospital.name}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
