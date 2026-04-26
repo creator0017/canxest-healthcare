@@ -205,7 +205,7 @@ const About = () => {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               { icon: <Stethoscope className="w-7 h-7 text-accent" />, label: "Clinic Type", value: "Consultation Clinic" },
-              { icon: <Building2 className="w-7 h-7 text-accent" />, label: "Specialities medical", value: "radiation,surgical" },
+              { icon: <Building2 className="w-7 h-7 text-accent" />, label: "Specialities medical", value: "Radiation,Surgical" },
               { icon: <Heart className="w-7 h-7 text-accent" />, label: "Speciality", value: "Surgical Oncology" },
             ].map((item, i) => (
               <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex gap-4 items-start">

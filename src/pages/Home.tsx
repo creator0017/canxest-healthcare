@@ -334,7 +334,7 @@ const Home = ({ onBookClick }: HomeProps) => {
             </div>
             <div>
               <p className="text-primary text-sm font-bold uppercase mb-1">OPD Timings</p>
-              <p className="font-medium text-slate-700 text-sm md:text-base">Mon – Sat: 10 AM – 1:30 PM, 5 PM – 6:30 PM</p>
+              <p className="font-medium text-slate-700 text-sm md:text-base">Mon, Wed, Thu, Sat: 10 AM – 1:30 PM, 5 PM – 6:30 PM<br/>Tue, Fri: 10 AM – 1:30 PM</p>
             </div>
           </div>
         </div>

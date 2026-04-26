@@ -17,7 +17,7 @@ const Footer = () => (
         <div>
           <h4 className="font-bold text-lg mb-6">Services</h4>
           <ul className="space-y-4 text-slate-400">
-            <li><a href="#" className="hover:text-white transition-colors">Oncology</a></li>
+            <li><a href="#" className="hover:text-white transition-colors">Medical oncology</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Chemotherapy</a></li>
             <li><a href="#" className="hover:text-white transition-colors">Immunotherapy</a></li>
             <li><a href="#" className="hover:text-white transition-colors"></a></li>

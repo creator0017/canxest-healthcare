@@ -44,9 +44,9 @@ const Doctors = () => {
       experience: "18+ Years",
       education: "KMC 87246",
       /* Replace /doctor-desk.jpg with the actual consultation photo */
-      image: "/doctor-desk.jpg",
+      image: "/docesk.jpg",
       bio: "Dr. Nischal Raj L is a conscientious surgical oncologist, specializing in the diagnosis and treatment of cancer through surgery. Having performed more than 5,000 complex cancer surgeries and managed over 10,000 cancer patients, he is a leader in the field. He works closely with a team of medical and radiation oncologists to create personalized treatment plans. He is skilled in advanced surgical techniques, including minimally invasive, laparoscopic, and robotic procedures.",
-      availability: "Mon – Sat: 10 AM – 1:30 PM, 5 PM – 6:30 PM",
+      availability: "Mon, Wed, Thu, Sat: 10 AM – 1:30 PM, 5 PM – 6:30 PM | Tue, Fri: 10 AM – 1:30 PM",
       email: "canxesthealthcareclinic@gmail.com",
       phone: "8105815577",
       qualifications: [
@@ -104,7 +104,7 @@ const Doctors = () => {
       education: "KMC 56939",
       image: "/dr-adnan-saeed.png",
       bio: "Dr. Adnan Saeed is a highly experienced Surgical Oncologist with over 23 years of dedicated practice in cancer surgery and comprehensive oncologic care. With specialised expertise in thyroid, breast, gastrointestinal (GI), and gynaecological cancers, Dr. Adnan Saeed is committed to delivering evidence-based, patient-centred treatment tailored to each individual’s needs. Known for a meticulous surgical approach and compassionate patient care, he has successfully managed a wide spectrum of complex oncological conditions, combining advanced surgical techniques with multidisciplinary cancer management.",
-      availability: "Mon – Sat: 10 AM – 1:30 PM, 5 PM – 6:30 PM",
+      availability: "Mon, Wed, Thu, Sat: 10 AM – 1:30 PM, 5 PM – 6:30 PM | Tue, Fri: 10 AM – 1:30 PM",
       email: "canxesthealthcareclinic@gmail.com",
       phone: "8105815577",
       qualifications: [
