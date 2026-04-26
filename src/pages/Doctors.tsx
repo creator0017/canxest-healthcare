@@ -279,7 +279,7 @@ const Doctors = () => {
                     onError={(e) => {
                       /* Fallback to scrubs photo if desk photo missing */
                       const img = e.target as HTMLImageElement;
-                      if (img.src.includes('doctor-desk.jpg')) {
+                      if (img.src.includes('docesk.jpg')) {
                         img.src = '/doctor-scrubs.jpg';
                       } else {
                         img.style.display = 'none';
@@ -355,7 +355,7 @@ const Doctors = () => {
                   className="w-full h-full object-cover object-center"
                   onError={(e) => {
                     const img = e.target as HTMLImageElement;
-                    if (img.src.includes('doctor-desk.jpg')) img.src = '/doctor-scrubs.jpg';
+                    if (img.src.includes('docesk.jpg')) img.src = '/doctor-scrubs.jpg';
                     else img.style.display = 'none';
                   }}
                 />
