@@ -245,7 +245,7 @@ const Home = ({ onBookClick }: HomeProps) => {
               </div>
               <div className="relative w-64 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-lavender">
                 <img
-                  src="/docesk.jpg"
+                  src="/doctor-desk.jpg"
                   alt="Dr. Nischal Raj L"
                   className="w-full h-full object-cover object-top"
                   onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
